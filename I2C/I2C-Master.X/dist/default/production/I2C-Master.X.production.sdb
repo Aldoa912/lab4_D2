@@ -23,6 +23,8 @@
 [v _I2C_Master_Wait I2C_Master_Wait `(v  1 e 1 0 ]
 "39
 [v _I2C_Master_Start I2C_Master_Start `(v  1 e 1 0 ]
+"47
+[v _I2C_Master_RepeatedStart I2C_Master_RepeatedStart `(v  1 e 1 0 ]
 "55
 [v _I2C_Master_Stop I2C_Master_Stop `(v  1 e 1 0 ]
 "65
@@ -43,15 +45,17 @@
 [v _Lcd_Write_Char Lcd_Write_Char `(v  1 e 1 0 ]
 "98
 [v _Lcd_Write_String Lcd_Write_String `(v  1 e 1 0 ]
-"56 C:\Users\aldoa\Desktop\QuintoSemestre\Digital2\lab\lab4_D2\I2C\I2C-Master.X\main.c
+"65 C:\Users\aldoa\Desktop\QuintoSemestre\Digital2\lab\lab4_D2\I2C\I2C-Master.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"89
+"120
 [v _setup setup `(v  1 e 1 0 ]
+"132
+[v _leer_hora leer_hora `(v  1 e 1 0 ]
 "229 C:\Program Files\Microchip\xc8\v2.40\pic\include\proc\pic16f887.h
 [v _PORTB PORTB `VEuc  1 e 1 @6 ]
 "353
 [v _PORTD PORTD `VEuc  1 e 1 @8 ]
-[s S300 . 1 `uc 1 RD0 1 0 :1:0 
+[s S315 . 1 `uc 1 RD0 1 0 :1:0 
 `uc 1 RD1 1 0 :1:1 
 `uc 1 RD2 1 0 :1:2 
 `uc 1 RD3 1 0 :1:3 
@@ -61,8 +65,8 @@
 `uc 1 RD7 1 0 :1:7 
 ]
 "370
-[u S309 . 1 `S300 1 . 1 0 ]
-[v _PORTDbits PORTDbits `VES309  1 e 1 @8 ]
+[u S324 . 1 `S315 1 . 1 0 ]
+[v _PORTDbits PORTDbits `VES324  1 e 1 @8 ]
 "844
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
 "851
@@ -71,13 +75,13 @@
 [v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
 "1246
 [v _ADCON0 ADCON0 `VEuc  1 e 1 @31 ]
-[s S210 . 1 `uc 1 ADON 1 0 :1:0 
+[s S225 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :4:2 
 `uc 1 ADCS 1 0 :2:6 
 ]
 "1277
-[s S215 . 1 `uc 1 . 1 0 :1:0 
+[s S230 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
@@ -86,17 +90,17 @@
 `uc 1 ADCS0 1 0 :1:6 
 `uc 1 ADCS1 1 0 :1:7 
 ]
-[s S224 . 1 `uc 1 . 1 0 :1:0 
+[s S239 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 nDONE 1 0 :1:1 
 ]
-[s S227 . 1 `uc 1 . 1 0 :1:0 
+[s S242 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_DONE 1 0 :1:1 
 ]
-[u S230 . 1 `S210 1 . 1 0 `S215 1 . 1 0 `S224 1 . 1 0 `S227 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES230  1 e 1 @31 ]
+[u S245 . 1 `S225 1 . 1 0 `S230 1 . 1 0 `S239 1 . 1 0 `S242 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES245  1 e 1 @31 ]
 "1479
 [v _TRISB TRISB `VEuc  1 e 1 @134 ]
-[s S131 . 1 `uc 1 TRISC0 1 0 :1:0 
+[s S146 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -106,27 +110,27 @@
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "1558
-[u S140 . 1 `S131 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES140  1 e 1 @135 ]
+[u S155 . 1 `S146 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES155  1 e 1 @135 ]
 "1603
 [v _TRISD TRISD `VEuc  1 e 1 @136 ]
-[s S80 . 1 `uc 1 SCS 1 0 :1:0 
+[s S84 . 1 `uc 1 SCS 1 0 :1:0 
 `uc 1 LTS 1 0 :1:1 
 `uc 1 HTS 1 0 :1:2 
 `uc 1 OSTS 1 0 :1:3 
 `uc 1 IRCF 1 0 :3:4 
 ]
 "1883
-[s S86 . 1 `uc 1 . 1 0 :4:0 
+[s S90 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 IRCF0 1 0 :1:4 
 `uc 1 IRCF1 1 0 :1:5 
 `uc 1 IRCF2 1 0 :1:6 
 ]
-[u S91 . 1 `S80 1 . 1 0 `S86 1 . 1 0 ]
-[v _OSCCONbits OSCCONbits `VES91  1 e 1 @143 ]
+[u S95 . 1 `S84 1 . 1 0 `S90 1 . 1 0 ]
+[v _OSCCONbits OSCCONbits `VES95  1 e 1 @143 ]
 "1980
 [v _SSPCON2 SSPCON2 `VEuc  1 e 1 @145 ]
-[s S152 . 1 `uc 1 SEN 1 0 :1:0 
+[s S167 . 1 `uc 1 SEN 1 0 :1:0 
 `uc 1 RSEN 1 0 :1:1 
 `uc 1 PEN 1 0 :1:2 
 `uc 1 RCEN 1 0 :1:3 
@@ -136,21 +140,21 @@
 `uc 1 GCEN 1 0 :1:7 
 ]
 "1997
-[u S161 . 1 `S152 1 . 1 0 ]
-[v _SSPCON2bits SSPCON2bits `VES161  1 e 1 @145 ]
+[u S176 . 1 `S167 1 . 1 0 ]
+[v _SSPCON2bits SSPCON2bits `VES176  1 e 1 @145 ]
 "2049
 [v _SSPADD SSPADD `VEuc  1 e 1 @147 ]
 "2178
 [v _SSPSTAT SSPSTAT `VEuc  1 e 1 @148 ]
-[s S261 . 1 `uc 1 . 1 0 :4:0 
+[s S276 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 VCFG0 1 0 :1:4 
 `uc 1 VCFG1 1 0 :1:5 
 `uc 1 . 1 0 :1:6 
 `uc 1 ADFM 1 0 :1:7 
 ]
 "2992
-[u S267 . 1 `S261 1 . 1 0 ]
-[v _ADCON1bits ADCON1bits `VES267  1 e 1 @159 ]
+[u S282 . 1 `S276 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES282  1 e 1 @159 ]
 "3388
 [v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
 "3450
@@ -177,23 +181,29 @@
 [v _TRISC3 TRISC3 `VEb  1 e 0 @1083 ]
 "4465
 [v _TRISC4 TRISC4 `VEb  1 e 0 @1084 ]
-"47 C:\Users\aldoa\Desktop\QuintoSemestre\Digital2\lab\lab4_D2\I2C\I2C-Master.X\main.c
+"49 C:\Users\aldoa\Desktop\QuintoSemestre\Digital2\lab\lab4_D2\I2C\I2C-Master.X\main.c
 [v _ADC ADC `uc  1 e 1 0 ]
-"48
-[v _centenas centenas `uc  1 e 1 0 ]
-"49
-[v _decenas decenas `uc  1 e 1 0 ]
 "50
+[v _centenas centenas `uc  1 e 1 0 ]
+"51
+[v _decenas decenas `uc  1 e 1 0 ]
+"52
 [v _unidad unidad `uc  1 e 1 0 ]
-"56
+"53
+[v _sec sec `i  1 e 2 0 ]
+"54
+[v _min min `i  1 e 2 0 ]
+"55
+[v _hora hora `i  1 e 2 0 ]
+"65
 [v _main main `(v  1 e 1 0 ]
 {
-"85
+"116
 } 0
-"89
+"120
 [v _setup setup `(v  1 e 1 0 ]
 {
-"99
+"130
 } 0
 "16 C:\Users\aldoa\Desktop\QuintoSemestre\Digital2\lab\lab4_D2\I2C\I2C-Master.X\I2C.c
 [v _I2C_Master_Init I2C_Master_Init `(v  1 e 1 0 ]
@@ -212,6 +222,46 @@
 [v ___lldiv@divisor divisor `ul  1 p 4 0 ]
 [v ___lldiv@dividend dividend `ul  1 p 4 4 ]
 "30
+} 0
+"132 C:\Users\aldoa\Desktop\QuintoSemestre\Digital2\lab\lab4_D2\I2C\I2C-Master.X\main.c
+[v _leer_hora leer_hora `(v  1 e 1 0 ]
+{
+"146
+} 0
+"65 C:\Users\aldoa\Desktop\QuintoSemestre\Digital2\lab\lab4_D2\I2C\I2C-Master.X\I2C.c
+[v _I2C_Master_Write I2C_Master_Write `(v  1 e 1 0 ]
+{
+[v I2C_Master_Write@d d `ui  1 p 2 0 ]
+"69
+} 0
+"55
+[v _I2C_Master_Stop I2C_Master_Stop `(v  1 e 1 0 ]
+{
+"59
+} 0
+"39
+[v _I2C_Master_Start I2C_Master_Start `(v  1 e 1 0 ]
+{
+"43
+} 0
+"47
+[v _I2C_Master_RepeatedStart I2C_Master_RepeatedStart `(v  1 e 1 0 ]
+{
+"51
+} 0
+"74
+[v _I2C_Master_Read I2C_Master_Read `(us  1 e 2 0 ]
+{
+"76
+[v I2C_Master_Read@temp temp `us  1 a 2 4 ]
+"74
+[v I2C_Master_Read@a a `us  1 p 2 0 ]
+"89
+} 0
+"32
+[v _I2C_Master_Wait I2C_Master_Wait `(v  1 e 1 0 ]
+{
+"35
 } 0
 "5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
@@ -302,34 +352,4 @@
 [v Lcd_Port@a a `uc  1 a 1 wreg ]
 [v Lcd_Port@a a `uc  1 a 1 0 ]
 "33
-} 0
-"65 C:\Users\aldoa\Desktop\QuintoSemestre\Digital2\lab\lab4_D2\I2C\I2C-Master.X\I2C.c
-[v _I2C_Master_Write I2C_Master_Write `(v  1 e 1 0 ]
-{
-[v I2C_Master_Write@d d `ui  1 p 2 0 ]
-"69
-} 0
-"55
-[v _I2C_Master_Stop I2C_Master_Stop `(v  1 e 1 0 ]
-{
-"59
-} 0
-"39
-[v _I2C_Master_Start I2C_Master_Start `(v  1 e 1 0 ]
-{
-"43
-} 0
-"74
-[v _I2C_Master_Read I2C_Master_Read `(us  1 e 2 0 ]
-{
-"76
-[v I2C_Master_Read@temp temp `us  1 a 2 4 ]
-"74
-[v I2C_Master_Read@a a `us  1 p 2 0 ]
-"89
-} 0
-"32
-[v _I2C_Master_Wait I2C_Master_Wait `(v  1 e 1 0 ]
-{
-"35
 } 0

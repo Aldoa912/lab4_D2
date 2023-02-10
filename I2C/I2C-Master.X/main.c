@@ -35,6 +35,8 @@
 #include <xc.h>
 #include "ADC.h"
 #include "LCD.h"
+//#include "DS3232.h"
+
 //*****************************************************************************
 // Definición de variables
 //*****************************************************************************
@@ -48,7 +50,14 @@ uint8_t ADC;
 char centenas;
 char decenas;
 char unidad;
+int sec;
+int min;
+int hora;
+int dia;
+int mes;
+int anio;
 void setup(void);
+void leer_hora(void);
 
 //*****************************************************************************
 // Main
@@ -60,17 +69,34 @@ void main(void) {
     Lcd_Set_Cursor(1,1);
     Lcd_Write_String("ADC     Fecha");
     while(1){
+
+        //Split the into char to display on lcd
+//         char sec_0 = sec%10;
+//         char sec_1 = (sec/10);
+//         char min_0 = min%10;
+//         char min_1 = min/10;
+//         char hour_0 = hora%10;
+//         char hour_1 = hora/10;
+//         char date_0 = dia%10;
+//         char date_1 = dia/10;
+//         char month_0 = mes%10;
+//         char month_1 = mes/10;
+//         char year_0 = anio%10;
+//         char year_1 = anio/10;
+        
         I2C_Master_Start();
         I2C_Master_Write(0x50);
         I2C_Master_Write(PORTB);
         I2C_Master_Stop();
-        __delay_ms(200);
+        __delay_us(250);
        
         I2C_Master_Start();
         I2C_Master_Write(0x51);
         ADC = I2C_Master_Read(0);
         I2C_Master_Stop();
-        __delay_ms(200); 
+        __delay_us(250);
+        
+        leer_hora();
         
         centenas = (ADC/100);
         decenas = (ADC/10)%10;
@@ -80,6 +106,11 @@ void main(void) {
         Lcd_Write_Char(centenas + 48);
         Lcd_Write_Char(decenas + 48);
         Lcd_Write_Char(unidad + 48);
+        
+        Lcd_Set_Cursor(2,8);
+        Lcd_Write_Char(sec+48);
+
+
     }
     return;
 }
@@ -96,4 +127,20 @@ void setup(void){
     OSCCONbits.IRCF = 0b111;        
     OSCCONbits.SCS = 1;
     I2C_Master_Init(100000);        // Inicializar Comuncación I2C
+}
+
+void leer_hora(void){
+    
+    I2C_Master_Start();            //Incia comunicaión I2C
+    I2C_Master_Write(0xD0);        //Escoje dirección del reloj
+    I2C_Master_Write(0x00);        //Posición donde va leer
+    I2C_Master_RepeatedStart();          //Reinicia la comuniación I2C
+    I2C_Master_Write(0xD1);        //Leer posición
+    sec = I2C_Master_Read(0x00);      //lee posicion de reloj
+    I2C_Master_Write(0);
+    min = I2C_Master_Read(0x01);      //lee posicion de reloj
+    I2C_Master_Write(0);
+    hora = I2C_Master_Read(0x02);      //lee posicion de reloj
+    I2C_Master_Write(1);
+    I2C_Master_Stop();             //Termina comunicaion I2C
 }

@@ -1,4 +1,4 @@
-# 1 "main.c"
+# 1 "DS3232.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,27 +6,24 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "main.c" 2
-# 11 "main.c"
-#pragma config FOSC = INTRC_NOCLKOUT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config MCLRE = OFF
-#pragma config CP = OFF
-#pragma config CPD = OFF
-#pragma config BOREN = OFF
-#pragma config IESO = OFF
-#pragma config FCMEN = OFF
-#pragma config LVP = OFF
+# 1 "DS3232.c" 2
+# 1 "./DS3232.h" 1
+# 10 "./DS3232.h"
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\xc.h" 1 3
+# 18 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\xc.h" 3
+extern const char __xc8_OPTIM_SPEED;
 
-
-#pragma config BOR4V = BOR40V
-#pragma config WRT = OFF
+extern double __fpnormalize(double);
 
 
 
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\xc8debug.h" 1 3
+# 13 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\xc8debug.h" 3
+#pragma intrinsic(__builtin_software_breakpoint)
+extern void __builtin_software_breakpoint(void);
+# 23 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\xc.h" 2 3
 
-
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\builtins.h" 1 3
 
 
 
@@ -163,8 +160,45 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 32 "main.c" 2
+# 4 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\builtins.h" 2 3
 
+
+
+#pragma intrinsic(__nop)
+extern void __nop(void);
+
+
+#pragma intrinsic(_delay)
+extern __attribute__((nonreentrant)) void _delay(uint32_t);
+#pragma intrinsic(_delaywdt)
+extern __attribute__((nonreentrant)) void _delaywdt(uint32_t);
+# 24 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\xc.h" 2 3
+
+
+
+
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\pic.h" 1 3
+
+
+
+
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\htc.h" 1 3
+
+
+
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\xc.h" 1 3
+# 4 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\htc.h" 2 3
+# 5 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\pic.h" 2 3
+
+
+
+
+
+
+
+
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\pic_chip_select.h" 1 3
+# 2914 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\pic_chip_select.h" 3
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\proc\\pic16f887.h" 1 3
 # 45 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\proc\\pic16f887.h" 3
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\__at.h" 1 3
@@ -2576,67 +2610,7 @@ extern volatile __bit nW __attribute__((address(0x4A2)));
 
 
 extern volatile __bit nWRITE __attribute__((address(0x4A2)));
-# 33 "main.c" 2
-
-# 1 "./I2C.h" 1
-# 18 "./I2C.h"
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\xc.h" 1 3
-# 18 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\xc.h" 3
-extern const char __xc8_OPTIM_SPEED;
-
-extern double __fpnormalize(double);
-
-
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\xc8debug.h" 1 3
-# 13 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\xc8debug.h" 3
-#pragma intrinsic(__builtin_software_breakpoint)
-extern void __builtin_software_breakpoint(void);
-# 23 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\xc.h" 2 3
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\builtins.h" 1 3
-
-
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 1 3
-# 4 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\builtins.h" 2 3
-
-
-
-#pragma intrinsic(__nop)
-extern void __nop(void);
-
-
-#pragma intrinsic(_delay)
-extern __attribute__((nonreentrant)) void _delay(uint32_t);
-#pragma intrinsic(_delaywdt)
-extern __attribute__((nonreentrant)) void _delaywdt(uint32_t);
-# 24 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\xc.h" 2 3
-
-
-
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\pic.h" 1 3
-
-
-
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\htc.h" 1 3
-
-
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\xc.h" 1 3
-# 4 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\htc.h" 2 3
-# 5 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\pic.h" 2 3
-
-
-
-
-
-
-
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\pic_chip_select.h" 1 3
+# 2914 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\pic_chip_select.h" 2 3
 # 13 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\pic.h" 2 3
 # 76 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\pic.h" 3
 __attribute__((__unsupported__("The " "FLASH_READ" " macro function is no longer supported. Please use the MPLAB X MCC."))) unsigned char __flash_read(unsigned short addr);
@@ -2657,9 +2631,25 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\xc.h" 2 3
-# 18 "./I2C.h" 2
+# 10 "./DS3232.h" 2
 
+int sec;
+int min;
+int hora;
+int dia;
+int mes;
+int anio;
 
+void enviar_hora(void);
+uint8_t leer_seg(void);
+uint8_t leer_min(void);
+uint8_t leer_hora(void);
+void enviar_fecha(void);
+void leer_fecha(void);
+# 1 "DS3232.c" 2
+
+# 1 "./I2C.h" 1
+# 20 "./I2C.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 1 3
 # 20 "./I2C.h" 2
 # 29 "./I2C.h"
@@ -2699,106 +2689,45 @@ unsigned short I2C_Master_Read(unsigned short a);
 
 
 void I2C_Slave_Init(uint8_t address);
-# 34 "main.c" 2
-
-
-# 1 "./ADC.h" 1
-# 13 "./ADC.h"
-void setupADC(void);
-unsigned int ADC_Read(unsigned int channel);
-# 36 "main.c" 2
-
-# 1 "./LCD.h" 1
-# 47 "./LCD.h"
-void Lcd_Port(char a);
-
-void Lcd_Cmd(char a);
-
-void Lcd_Clear(void);
-
-void Lcd_Set_Cursor(char a, char b);
-
-void Lcd_Init(void);
-
-void Lcd_Write_Char(char a);
-
-void Lcd_Write_String(char *a);
-
-void Lcd_Shift_Right(void);
-
-void Lcd_Shift_Left(void);
-# 37 "main.c" 2
-# 49 "main.c"
-uint8_t ADC;
-char centenas;
-char decenas;
-char unidad;
-int sec;
-int min;
-int hora;
-int dia;
-int mes;
-int anio;
-void setup(void);
-void leer_hora(void);
+# 2 "DS3232.c" 2
 
 
 
+void enviar_hora(void){
 
-void main(void) {
-    setup();
-    Lcd_Init();
-    Lcd_Clear();
-    Lcd_Set_Cursor(1,1);
-    Lcd_Write_String("ADC     Fecha");
-    while(1){
-# 87 "main.c"
-        I2C_Master_Start();
-        I2C_Master_Write(0x50);
-        I2C_Master_Write(PORTB);
-        I2C_Master_Stop();
-        _delay((unsigned long)((250)*(8000000/4000000.0)));
-
-        I2C_Master_Start();
-        I2C_Master_Write(0x51);
-        ADC = I2C_Master_Read(0);
-        I2C_Master_Stop();
-        _delay((unsigned long)((250)*(8000000/4000000.0)));
-
-        leer_hora();
-
-        centenas = (ADC/100);
-        decenas = (ADC/10)%10;
-        unidad = ADC%10;
-
-        Lcd_Set_Cursor(2,1);
-        Lcd_Write_Char(centenas + 48);
-        Lcd_Write_Char(decenas + 48);
-        Lcd_Write_Char(unidad + 48);
-
-        Lcd_Set_Cursor(2,8);
-        Lcd_Write_Char(sec+48);
-
-
-    }
-    return;
+    I2C_Master_Start();
+    I2C_Master_Write(0xD0);
+    I2C_Master_Write(0x00);
+    I2C_Master_Write(sec);
+    I2C_Master_Write(min);
+    I2C_Master_Write(hora);
+    I2C_Master_Stop();
 }
 
+uint8_t leer_seg(void){
 
-
-void setup(void){
-    ANSEL = 0;
-    ANSELH = 0;
-    TRISB = 0;
-    TRISD = 0;
-    PORTB = 0;
-    PORTD = 0;
-    OSCCONbits.IRCF = 0b111;
-    OSCCONbits.SCS = 1;
-    I2C_Master_Init(100000);
+    I2C_Master_Start();
+    I2C_Master_Write(0xD0);
+    I2C_Master_Write(0x00);
+    I2C_Master_RepeatedStart();
+    I2C_Master_Write(0xD1);
+    sec = I2C_Master_Read(0x00);
+    I2C_Master_Stop();
 }
 
-void leer_hora(void){
+uint8_t leer_min(void){
+
+    I2C_Master_Start();
+    I2C_Master_Write(0xD0);
+    I2C_Master_Write(0x00);
+    I2C_Master_RepeatedStart();
+    I2C_Master_Write(0xD1);
+    min = I2C_Master_Read(0x01);
+
+    I2C_Master_Stop();
+}
+
+uint8_t leer_hora(void){
 
     I2C_Master_Start();
     I2C_Master_Write(0xD0);
@@ -2810,6 +2739,33 @@ void leer_hora(void){
     min = I2C_Master_Read(0x01);
     I2C_Master_Write(0);
     hora = I2C_Master_Read(0x02);
+    I2C_Master_Write(1);
+    I2C_Master_Stop();
+}
+
+void enviar_fecha(void){
+
+    I2C_Master_Start();
+    I2C_Master_Write(0xD0);
+    I2C_Master_Write(0x04);
+    I2C_Master_Write(dia);
+    I2C_Master_Write(mes);
+    I2C_Master_Write(anio);
+    I2C_Master_Stop();
+}
+
+void leer_fecha(void){
+
+    I2C_Master_Start();
+    I2C_Master_Write(0xD0);
+    I2C_Master_Write(0x04);
+    I2C_Master_RepeatedStart();
+    I2C_Master_Write(0xD1);
+    dia = I2C_Master_Read(0x04);
+    I2C_Master_Write(0);
+    mes = I2C_Master_Read(0x05);
+    I2C_Master_Write(0);
+    anio = I2C_Master_Read(0x06);
     I2C_Master_Write(1);
     I2C_Master_Stop();
 }
