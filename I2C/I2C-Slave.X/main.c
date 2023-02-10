@@ -33,12 +33,14 @@
 #include <pic16f887.h>
 #include "I2C.h"
 #include <xc.h>
+#include "ADC.h"
 //*****************************************************************************
 // Definición de variables
 //*****************************************************************************
 #define _XTAL_FREQ 8000000
 uint8_t z;
 uint8_t dato;
+uint8_t ADC;
 //*****************************************************************************
 // Definición de funciones para que se puedan colocar después del main de lo 
 // contrario hay que colocarlos todas las funciones antes del main
@@ -72,7 +74,7 @@ void __interrupt() isr(void){
         }else if(!SSPSTATbits.D_nA && SSPSTATbits.R_nW){
             z = SSPBUF;
             BF = 0;
-            SSPBUF = PORTB;
+            SSPBUF = ADC;
             SSPCONbits.CKP = 1;
             __delay_us(250);
             while(SSPSTATbits.BF);
@@ -86,12 +88,12 @@ void __interrupt() isr(void){
 //*****************************************************************************
 void main(void) {
     setup();
+    setupADC();
     //*************************************************************************
     // Loop infinito
     //*************************************************************************
     while(1){
-        PORTB = ~PORTB;
-       __delay_ms(500);
+        ADC = ADC_Read(0);
     }
     return;
 }
@@ -104,8 +106,13 @@ void setup(void){
     
     TRISB = 0;
     TRISD = 0;
+    TRISA = 0b00000001;
     
     PORTB = 0;
     PORTD = 0;
+    PORTA = 0;
+    OSCCONbits.IRCF = 0b111;        
+    OSCCONbits.SCS = 1;
+      
     I2C_Slave_Init(0x50);   
 }

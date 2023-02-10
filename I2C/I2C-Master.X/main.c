@@ -33,6 +33,7 @@
 #include <pic16f887.h>
 #include "I2C.h"
 #include <xc.h>
+#include "ADC.h"
 //*****************************************************************************
 // Definición de variables
 //*****************************************************************************
@@ -60,8 +61,7 @@ void main(void) {
         I2C_Master_Write(0x51);
         PORTD = I2C_Master_Read(0);
         I2C_Master_Stop();
-        __delay_ms(200);
-        PORTB++;   
+        __delay_ms(200); 
     }
     return;
 }
@@ -75,5 +75,7 @@ void setup(void){
     TRISD = 0;
     PORTB = 0;
     PORTD = 0;
+    OSCCONbits.IRCF = 0b111;        
+    OSCCONbits.SCS = 1;
     I2C_Master_Init(100000);        // Inicializar Comuncación I2C
 }
