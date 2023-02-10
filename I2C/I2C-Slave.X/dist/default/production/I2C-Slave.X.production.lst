@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.40 build 20220703182018 
-                                                                                               Thu Feb 09 23:58:01 2023
+                                                                                               Fri Feb 10 11:34:58 2023
 
 Microchip MPLAB XC8 C Compiler v2.40 (Free license) build 20220703182018 Og1 
      1                           	processor	16F887
@@ -1173,8 +1173,8 @@ Microchip MPLAB XC8 C Compiler v2.40 (Free license) build 20220703182018 Og1
   1158                           
   1159                           ;Config register CONFIG1 @ 0x2007
   1160                           ;	Oscillator Selection bits
-  1161                           ;	FOSC = EXTRC_NOCLKOUT, RCIO oscillator: I/O function on RA6/OSC2/CLKOUT pin, RC on RA7
-      +                          /OSC1/CLKIN
+  1161                           ;	FOSC = INTRC_NOCLKOUT, INTOSCIO oscillator: I/O function on RA6/OSC2/CLKOUT pin, I/O f
+      +                          unction on RA7/OSC1/CLKIN
   1162                           ;	Watchdog Timer Enable bit
   1163                           ;	WDTE = OFF, WDT disabled and can be enabled by SWDTEN bit of the WDTCON register
   1164                           ;	Power-up Timer Enable bit
@@ -1194,9 +1194,8 @@ Microchip MPLAB XC8 C Compiler v2.40 (Free license) build 20220703182018 Og1
   1178                           ;	Low Voltage Programming Enable bit
   1179                           ;	LVP = OFF, RB3 pin has digital I/O, HV on MCLR must be used for programming
   1180                           ;	In-Circuit Debugger Mode bit
-  1181                           ;	DEBUG = 0x1, unprogrammed default
-  1182     2007                     	org	8199
-  1183     2007  20D6               	dw	8406
+  1181                           ;	DEBUG = 0x1, unprogramme  1182     2007                     	org	8199
+  1183     2007  20D4               	dw	8404
   1184                           
   1185                           ;Config register CONFIG2 @ 0x2008
   1186                           ;	Brown-out Reset Selection bit
@@ -1338,7 +1337,7 @@ DATA                 0      0       A      12        0.0%
 
 
 Microchip Technology PIC Macro Assembler V2.40 build 20220703182018 
-Symbol Table                                                                                   Thu Feb 09 23:58:01 2023
+Symbol Table                                                                                   Fri Feb 10 11:34:58 2023
 
                       _z 0079              _SSPSTATbits 0094                       _BF 04A0  
                      l55 00C6                      l122 00D1                      l143 007F  

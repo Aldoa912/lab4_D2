@@ -8,7 +8,7 @@
 // Palabra de configuración
 //*****************************************************************************
 // CONFIG1
-#pragma config FOSC = EXTRC_NOCLKOUT// Oscillator Selection bits (RCIO oscillator: I/O function on RA6/OSC2/CLKOUT pin, RC on RA7/OSC1/CLKIN)
+#pragma config FOSC = INTRC_NOCLKOUT// Oscillator Selection bits (RCIO oscillator: I/O function on RA6/OSC2/CLKOUT pin, RC on RA7/OSC1/CLKIN)
 #pragma config WDTE = OFF       // Watchdog Timer Enable bit (WDT disabled and can be enabled by SWDTEN bit of the WDTCON register)
 #pragma config PWRTE = OFF      // Power-up Timer Enable bit (PWRT disabled)
 #pragma config MCLRE = OFF      // RE3/MCLR pin function select bit (RE3/MCLR pin function is digital input, MCLR internally tied to VDD)
@@ -34,6 +34,7 @@
 #include "I2C.h"
 #include <xc.h>
 #include "ADC.h"
+#include "LCD.h"
 //*****************************************************************************
 // Definición de variables
 //*****************************************************************************
@@ -43,6 +44,10 @@
 // Definición de funciones para que se puedan colocar después del main de lo 
 // contrario hay que colocarlos todas las funciones antes del main
 //*****************************************************************************
+uint8_t ADC;
+char centenas;
+char decenas;
+char unidad;
 void setup(void);
 
 //*****************************************************************************
@@ -50,6 +55,10 @@ void setup(void);
 //*****************************************************************************
 void main(void) {
     setup();
+    Lcd_Init();
+    Lcd_Clear();
+    Lcd_Set_Cursor(1,1);
+    Lcd_Write_String("ADC     Fecha");
     while(1){
         I2C_Master_Start();
         I2C_Master_Write(0x50);
@@ -59,9 +68,18 @@ void main(void) {
        
         I2C_Master_Start();
         I2C_Master_Write(0x51);
-        PORTD = I2C_Master_Read(0);
+        ADC = I2C_Master_Read(0);
         I2C_Master_Stop();
         __delay_ms(200); 
+        
+        centenas = (ADC/100);
+        decenas = (ADC/10)%10;
+        unidad = ADC%10;
+
+        Lcd_Set_Cursor(2,1);
+        Lcd_Write_Char(centenas + 48);
+        Lcd_Write_Char(decenas + 48);
+        Lcd_Write_Char(unidad + 48);
     }
     return;
 }
