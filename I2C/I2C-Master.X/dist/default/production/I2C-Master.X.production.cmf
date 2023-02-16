@@ -50,7 +50,7 @@ strings STRING 0 800 800 D 2 1
 clrtext CODE 0 CE9 CE9 8 2 1
 bssCOMMON COMMON 1 7A 7A 2 1 1
 config CONFIG 4 2007 2007 2 2 1
-$C:\Users\aldoa\AppData\Local\Temp\xcAskg8.o
+$C:\Users\aldoa\AppData\Local\Temp\xcAselc.o
 idloc IDLOC 5 2000 2000 4 2 1
 reset_vec CODE 0 0 0 3 2 1
 end_init CODE 0 C C 3 2 1
@@ -109,18 +109,18 @@ STRING 1000-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\I2C-Master.X.production.o
-F cinit CODE >1256:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-F cinit CODE >1259:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-F cinit CODE >1360:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-10 cinit CODE >1361:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-11 cinit CODE >1364:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-12 cinit CODE >1365:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-13 cinit CODE >1366:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-14 cinit CODE >1367:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-15 cinit CODE >1368:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-1A cinit CODE >1374:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-1A cinit CODE >1376:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-1B cinit CODE >1377:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
+F cinit CODE >1256:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+F cinit CODE >1259:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+F cinit CODE >1360:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+10 cinit CODE >1361:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+11 cinit CODE >1364:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+12 cinit CODE >1365:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+13 cinit CODE >1366:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+14 cinit CODE >1367:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+15 cinit CODE >1368:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+1A cinit CODE >1374:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+1A cinit CODE >1376:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+1B cinit CODE >1377:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
 4 intentry CODE >79:C:\Users\aldoa\Desktop\QuintoSemestre\Digital2\lab\lab4_D2\I2C\I2C-Master.X\main.c
 468 text27 CODE >79:C:\Users\aldoa\Desktop\QuintoSemestre\Digital2\lab\lab4_D2\I2C\I2C-Master.X\main.c
 468 text27 CODE >80:C:\Users\aldoa\Desktop\QuintoSemestre\Digital2\lab\lab4_D2\I2C\I2C-Master.X\main.c
@@ -585,16 +585,16 @@ F8 maintext CODE >150:C:\Users\aldoa\Desktop\QuintoSemestre\Digital2\lab\lab4_D2
 44A maintext CODE >239:C:\Users\aldoa\Desktop\QuintoSemestre\Digital2\lab\lab4_D2\I2C\I2C-Master.X\main.c
 453 maintext CODE >240:C:\Users\aldoa\Desktop\QuintoSemestre\Digital2\lab\lab4_D2\I2C\I2C-Master.X\main.c
 45C maintext CODE >201:C:\Users\aldoa\Desktop\QuintoSemestre\Digital2\lab\lab4_D2\I2C\I2C-Master.X\main.c
-CE9 clrtext CODE >1347:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-CE9 clrtext CODE >1348:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-CEA clrtext CODE >1349:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-CEA clrtext CODE >1350:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-CEB clrtext CODE >1351:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-CEC clrtext CODE >1352:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-CED clrtext CODE >1353:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-CEE clrtext CODE >1354:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-CEF clrtext CODE >1355:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
-CF0 clrtext CODE >1356:C:\Users\aldoa\AppData\Local\Temp\xcAskg8.s
+CE9 clrtext CODE >1347:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+CE9 clrtext CODE >1348:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+CEA clrtext CODE >1349:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+CEA clrtext CODE >1350:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+CEB clrtext CODE >1351:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+CEC clrtext CODE >1352:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+CED clrtext CODE >1353:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+CEE clrtext CODE >1354:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+CEF clrtext CODE >1355:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
+CF0 clrtext CODE >1356:C:\Users\aldoa\AppData\Local\Temp\xcAselc.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -625,14 +625,14 @@ __end_of_Lcd_Port 1AD8 0 CODE 0 text26 dist/default/production\I2C-Master.X.prod
 __Hstrings 0 0 ABS 0 strings -
 _IOCB 96 0 ABS 0 - dist/default/production\I2C-Master.X.production.o
 _PEIE 5E 0 ABS 0 - dist/default/production\I2C-Master.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\aldoa\AppData\Local\Temp\xcAskg8.o
+___sp 0 0 STACK 2 stack C:\Users\aldoa\AppData\Local\Temp\xcAselc.o
 _anio 22 0 BANK0 1 bssBANK0 dist/default/production\I2C-Master.X.production.o
 _flag 20 0 BANK0 1 bssBANK0 dist/default/production\I2C-Master.X.production.o
 _hora 28 0 BANK0 1 bssBANK0 dist/default/production\I2C-Master.X.production.o
 _main 3C 0 CODE 0 maintext dist/default/production\I2C-Master.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\I2C-Master.X.production.o
 _Lcd_Write_Char 1BDA 0 CODE 0 text21 dist/default/production\I2C-Master.X.production.o
-start 18 0 CODE 0 init C:\Users\aldoa\AppData\Local\Temp\xcAskg8.o
+start 18 0 CODE 0 init C:\Users\aldoa\AppData\Local\Temp\xcAselc.o
 Lcd_Port@a 72 0 COMMON 1 cstackCOMMON dist/default/production\I2C-Master.X.production.o
 __HbssCOMMON 0 0 ABS 0 bssCOMMON -
 ?___wmul 72 0 COMMON 1 cstackCOMMON dist/default/production\I2C-Master.X.production.o
@@ -641,12 +641,12 @@ _OPTION_REGbits 81 0 ABS 0 - dist/default/production\I2C-Master.X.production.o
 __Hpowerup 0 0 CODE 0 powerup -
 ___awmod@sign 79 0 COMMON 1 cstackCOMMON dist/default/production\I2C-Master.X.production.o
 I2C_Master_Read@a 72 0 COMMON 1 cstackCOMMON dist/default/production\I2C-Master.X.production.o
-intlevel0 0 0 ENTRY 0 functab C:\Users\aldoa\AppData\Local\Temp\xcAskg8.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\aldoa\AppData\Local\Temp\xcAskg8.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\aldoa\AppData\Local\Temp\xcAskg8.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\aldoa\AppData\Local\Temp\xcAskg8.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\aldoa\AppData\Local\Temp\xcAskg8.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\aldoa\AppData\Local\Temp\xcAskg8.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\aldoa\AppData\Local\Temp\xcAselc.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\aldoa\AppData\Local\Temp\xcAselc.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\aldoa\AppData\Local\Temp\xcAselc.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\aldoa\AppData\Local\Temp\xcAselc.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\aldoa\AppData\Local\Temp\xcAselc.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\aldoa\AppData\Local\Temp\xcAselc.o
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
 _OSCCONbits 8F 0 ABS 0 - dist/default/production\I2C-Master.X.production.o
 wtemp0 7E 0 ABS 0 - dist/default/production\I2C-Master.X.production.o
@@ -675,8 +675,8 @@ ___awdiv@divisor 72 0 COMMON 1 cstackCOMMON dist/default/production\I2C-Master.X
 __end_of___awdiv AE6 0 CODE 0 text19 dist/default/production\I2C-Master.X.production.o
 __end_of___awmod 1E7E 0 CODE 0 text18 dist/default/production\I2C-Master.X.production.o
 __end_of___lldiv BB6 0 CODE 0 text3 dist/default/production\I2C-Master.X.production.o
-___stackhi 0 0 ABS 0 - C:\Users\aldoa\AppData\Local\Temp\xcAskg8.o
-___stacklo 0 0 ABS 0 - C:\Users\aldoa\AppData\Local\Temp\xcAskg8.o
+___stackhi 0 0 ABS 0 - C:\Users\aldoa\AppData\Local\Temp\xcAselc.o
+___stacklo 0 0 ABS 0 - C:\Users\aldoa\AppData\Local\Temp\xcAselc.o
 Lcd_Set_Cursor@temp 42 0 BANK0 1 cstackBANK0 dist/default/production\I2C-Master.X.production.o
 ___lldiv@counter 44 0 BANK0 1 cstackBANK0 dist/default/production\I2C-Master.X.production.o
 _WPUBbits 95 0 ABS 0 - dist/default/production\I2C-Master.X.production.o
@@ -691,7 +691,7 @@ _SSPBUF 13 0 ABS 0 - dist/default/production\I2C-Master.X.production.o
 _SSPCON 14 0 ABS 0 - dist/default/production\I2C-Master.X.production.o
 _TRISC3 43B 0 ABS 0 - dist/default/production\I2C-Master.X.production.o
 _TRISC4 43C 0 ABS 0 - dist/default/production\I2C-Master.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\aldoa\AppData\Local\Temp\xcAskg8.o
+___int_sp 0 0 STACK 2 stack C:\Users\aldoa\AppData\Local\Temp\xcAselc.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -771,7 +771,7 @@ ___lldiv@divisor 72 0 COMMON 1 cstackCOMMON dist/default/production\I2C-Master.X
 __stringtab 1000 0 STRING 0 strings dist/default/production\I2C-Master.X.production.o
 Lcd_Write_String@a 79 0 COMMON 1 cstackCOMMON dist/default/production\I2C-Master.X.production.o
 Lcd_Write_String@i 77 0 COMMON 1 cstackCOMMON dist/default/production\I2C-Master.X.production.o
-reset_vec 0 0 CODE 0 reset_vec C:\Users\aldoa\AppData\Local\Temp\xcAskg8.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\aldoa\AppData\Local\Temp\xcAselc.o
 __end_of_Lcd_Cmd 1A94 0 CODE 0 text25 dist/default/production\I2C-Master.X.production.o
 __LbssBANK0 0 0 ABS 0 bssBANK0 -
 ___awmod@counter 78 0 COMMON 1 cstackCOMMON dist/default/production\I2C-Master.X.production.o
