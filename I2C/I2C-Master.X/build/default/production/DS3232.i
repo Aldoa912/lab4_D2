@@ -2640,12 +2640,15 @@ int dia;
 int mes;
 int anio;
 
+
 void enviar_hora(void);
-uint8_t leer_seg(void);
-uint8_t leer_min(void);
-uint8_t leer_hora(void);
+int leer_seg(void);
+int leer_min(void);
+int leer_hora(void);
+int leer_dia (void);
+int leer_mes (void);
+int leer_anio (void);
 void enviar_fecha(void);
-void leer_fecha(void);
 # 1 "DS3232.c" 2
 
 # 1 "./I2C.h" 1
@@ -2704,7 +2707,7 @@ void enviar_hora(void){
     I2C_Master_Stop();
 }
 
-uint8_t leer_seg(void){
+int leer_seg(void){
 
     I2C_Master_Start();
     I2C_Master_Write(0xD0);
@@ -2713,34 +2716,73 @@ uint8_t leer_seg(void){
     I2C_Master_Write(0xD1);
     sec = I2C_Master_Read(0x00);
     I2C_Master_Stop();
+    sec = (sec>>4)*10 + (sec & 0x0F);
+    return sec;
 }
 
-uint8_t leer_min(void){
+int leer_min(void){
 
     I2C_Master_Start();
     I2C_Master_Write(0xD0);
-    I2C_Master_Write(0x00);
+    I2C_Master_Write(0x01);
     I2C_Master_RepeatedStart();
     I2C_Master_Write(0xD1);
-    min = I2C_Master_Read(0x01);
-
+    min = I2C_Master_Read(0x00);
     I2C_Master_Stop();
+    min = (min>>4)*10 + (min & 0x0F);
+    return min;
 }
 
-uint8_t leer_hora(void){
+int leer_hora(void){
 
     I2C_Master_Start();
     I2C_Master_Write(0xD0);
-    I2C_Master_Write(0x00);
+    I2C_Master_Write(0x02);
     I2C_Master_RepeatedStart();
     I2C_Master_Write(0xD1);
-    sec = I2C_Master_Read(0x00);
-    I2C_Master_Write(0);
-    min = I2C_Master_Read(0x01);
-    I2C_Master_Write(0);
-    hora = I2C_Master_Read(0x02);
-    I2C_Master_Write(1);
+    hora = I2C_Master_Read(0x00);
     I2C_Master_Stop();
+    hora = (hora>>4)*10 + (hora & 0x0F);
+    return hora;
+}
+
+int leer_dia(void){
+
+    I2C_Master_Start();
+    I2C_Master_Write(0xD0);
+    I2C_Master_Write(0x04);
+    I2C_Master_RepeatedStart();
+    I2C_Master_Write(0xD1);
+    dia = I2C_Master_Read(0x00);
+    I2C_Master_Stop();
+    dia = (dia>>4)*10 + (dia & 0x0F);
+    return dia;
+}
+
+int leer_mes(void){
+
+    I2C_Master_Start();
+    I2C_Master_Write(0xD0);
+    I2C_Master_Write(0x05);
+    I2C_Master_RepeatedStart();
+    I2C_Master_Write(0xD1);
+    mes = I2C_Master_Read(0x00);
+    I2C_Master_Stop();
+    mes = (mes>>4)*10 + (mes & 0x0F);
+    return mes;
+}
+
+int leer_anio(void){
+
+    I2C_Master_Start();
+    I2C_Master_Write(0xD0);
+    I2C_Master_Write(0x06);
+    I2C_Master_RepeatedStart();
+    I2C_Master_Write(0xD1);
+    anio = I2C_Master_Read(0x00);
+    I2C_Master_Stop();
+    anio = (anio>>4)*10 + (anio & 0x0F);
+    return hora;
 }
 
 void enviar_fecha(void){
@@ -2751,21 +2793,5 @@ void enviar_fecha(void){
     I2C_Master_Write(dia);
     I2C_Master_Write(mes);
     I2C_Master_Write(anio);
-    I2C_Master_Stop();
-}
-
-void leer_fecha(void){
-
-    I2C_Master_Start();
-    I2C_Master_Write(0xD0);
-    I2C_Master_Write(0x04);
-    I2C_Master_RepeatedStart();
-    I2C_Master_Write(0xD1);
-    dia = I2C_Master_Read(0x04);
-    I2C_Master_Write(0);
-    mes = I2C_Master_Read(0x05);
-    I2C_Master_Write(0);
-    anio = I2C_Master_Read(0x06);
-    I2C_Master_Write(1);
     I2C_Master_Stop();
 }

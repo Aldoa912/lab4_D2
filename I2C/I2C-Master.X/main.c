@@ -35,6 +35,7 @@
 #include <xc.h>
 #include "ADC.h"
 #include "LCD.h"
+#include "DS3232.h"
 //#include "DS3232.h"
 
 //*****************************************************************************
@@ -50,14 +51,71 @@ uint8_t ADC;
 char centenas;
 char decenas;
 char unidad;
+char u_sec;
+char d_sec;
+char u_min;
+char d_min;
+char u_hora;
+char d_hora;
+char u_dia;
+char d_dia;
+char u_mes;
+char d_mes;
+char u_anio;
+char d_anio;
+char Fecha[];
 int sec;
 int min;
 int hora;
 int dia;
 int mes;
 int anio;
+int flag;
+int contador;
 void setup(void);
-void leer_hora(void);
+
+
+
+void __interrupt () isr (void){
+    if (INTCONbits.RBIF){
+        if (PORTBbits.RB0 == 0){
+            flag++;
+            PORTAbits.RA0 = 1;
+            if (flag == 2){
+                flag = 0;
+                PORTAbits.RA0 = 0;
+            }
+
+        }
+        
+        else if (PORTBbits.RB1 == 0 && flag == 1){
+            contador++;
+            if (contador == 3)
+                contador = 0;
+        }
+        
+        else if (PORTBbits.RB2 == 0 && flag == 1){
+            if (contador == 0)
+                dia++;
+            else if (contador == 1)
+                mes++;
+            else if (contador == 2)
+                anio++;
+        }
+        
+        else if (PORTBbits.RB3 == 0 && flag == 1){
+            if (contador == 0)
+                dia--;
+            else if (contador == 1)
+                mes--;
+            else if (contador == 2)
+                anio--;
+        }
+ 
+        INTCONbits.RBIF = 0;
+    }
+    return;
+}
 
 //*****************************************************************************
 // Main
@@ -67,36 +125,22 @@ void main(void) {
     Lcd_Init();
     Lcd_Clear();
     Lcd_Set_Cursor(1,1);
-    Lcd_Write_String("ADC     Fecha");
+    Lcd_Write_String("ADC");
     while(1){
 
-        //Split the into char to display on lcd
-//         char sec_0 = sec%10;
-//         char sec_1 = (sec/10);
-//         char min_0 = min%10;
-//         char min_1 = min/10;
-//         char hour_0 = hora%10;
-//         char hour_1 = hora/10;
-//         char date_0 = dia%10;
-//         char date_1 = dia/10;
-//         char month_0 = mes%10;
-//         char month_1 = mes/10;
-//         char year_0 = anio%10;
-//         char year_1 = anio/10;
-        
-        I2C_Master_Start();
-        I2C_Master_Write(0x50);
-        I2C_Master_Write(PORTB);
-        I2C_Master_Stop();
-        __delay_us(250);
        
+        sec = leer_seg();
+        min = leer_min();
+        hora = leer_hora();
+        dia = leer_dia();
+        mes = leer_mes();
+        anio = leer_anio();
+        
         I2C_Master_Start();
         I2C_Master_Write(0x51);
         ADC = I2C_Master_Read(0);
         I2C_Master_Stop();
         __delay_us(250);
-        
-        leer_hora();
         
         centenas = (ADC/100);
         decenas = (ADC/10)%10;
@@ -107,9 +151,96 @@ void main(void) {
         Lcd_Write_Char(decenas + 48);
         Lcd_Write_Char(unidad + 48);
         
-        Lcd_Set_Cursor(2,8);
-        Lcd_Write_Char(sec+48);
+        
+        u_hora = hora%10;
+        d_hora = (hora/10)%10;
+        
+        Lcd_Set_Cursor(1,7);
+        Lcd_Write_Char(d_hora+48);
+        Lcd_Write_Char(u_hora+48);
+        Lcd_Write_Char(':');
+        
+        
+        u_min = min%10;
+        d_min = (min/10)%10;
+        
+        Lcd_Write_Char(d_min+48);
+        Lcd_Write_Char(u_min+48);
+        Lcd_Write_Char(':');
+        
+        
+        u_sec = sec%10;
+        d_sec = (sec/10)%10;
+        
+        Lcd_Write_Char(d_sec+48);
+        Lcd_Write_Char(u_sec+48);
+        
+        
+        u_dia = dia%10;
+        d_dia = (dia/10)%10;
+        
+        Lcd_Set_Cursor(2,7);
+        Lcd_Write_Char(d_dia+48);
+        Lcd_Write_Char(u_dia+48);
+        Lcd_Write_Char('/');
+        
+        u_mes = mes%10;
+        d_mes = (mes/10)%10;
+        
+        Lcd_Write_Char(d_mes+48);
+        Lcd_Write_Char(u_mes+48);
+        Lcd_Write_Char('/');
+        
+        u_anio = anio%10;
+        d_anio = (anio/10)%10;
+        
+        Lcd_Write_String("20");
+        Lcd_Write_Char(d_anio+48);
+        Lcd_Write_Char(u_anio+48);
+        
+        while (flag == 1){
+            
+            enviar_fecha();
+        
+            I2C_Master_Start();
+            I2C_Master_Write(0x51);
+            ADC = I2C_Master_Read(0);
+            I2C_Master_Stop();
+            __delay_us(250);
 
+            centenas = (ADC/100);
+            decenas = (ADC/10)%10;
+            unidad = ADC%10;
+
+            Lcd_Set_Cursor(2,1);
+            Lcd_Write_Char(centenas + 48);
+            Lcd_Write_Char(decenas + 48);
+            Lcd_Write_Char(unidad + 48);
+
+            u_dia = dia%10;
+            d_dia = (dia/10)%10;
+
+            Lcd_Set_Cursor(2,7);
+            Lcd_Write_Char(d_dia+48);
+            Lcd_Write_Char(u_dia+48);
+            Lcd_Write_Char('/');
+
+            u_mes = mes%10;
+            d_mes = (mes/10)%10;
+
+            Lcd_Write_Char(d_mes+48);
+            Lcd_Write_Char(u_mes+48);
+            Lcd_Write_Char('/');
+
+            u_anio = anio%10;
+            d_anio = (anio/10)%10;
+
+            Lcd_Write_String("20");
+            Lcd_Write_Char(d_anio+48);
+            Lcd_Write_Char(u_anio+48);
+
+        
+        }
 
     }
     return;
@@ -120,27 +251,27 @@ void main(void) {
 void setup(void){
     ANSEL = 0;
     ANSELH = 0;
-    TRISB = 0;
+    TRISB = 0b00001111;
     TRISD = 0;
+    TRISA = 0;
     PORTB = 0;
     PORTD = 0;
+    PORTA = 0;
+    OPTION_REGbits.nRBPU = 0;
+    WPUBbits.WPUB0 = 1;
+    WPUBbits.WPUB1 = 1;
+    WPUBbits.WPUB2 = 1;
+    WPUBbits.WPUB3 = 1;
+    
+    IOCB = 0b00001111;
+    
+//    INTCONbits.PEIE = 1;
+    INTCONbits.RBIF = 0;
+    INTCONbits.RBIE = 1;
+    INTCONbits.GIE = 1;
+    
     OSCCONbits.IRCF = 0b111;        
     OSCCONbits.SCS = 1;
     I2C_Master_Init(100000);        // Inicializar Comuncación I2C
 }
 
-void leer_hora(void){
-    
-    I2C_Master_Start();            //Incia comunicaión I2C
-    I2C_Master_Write(0xD0);        //Escoje dirección del reloj
-    I2C_Master_Write(0x00);        //Posición donde va leer
-    I2C_Master_RepeatedStart();          //Reinicia la comuniación I2C
-    I2C_Master_Write(0xD1);        //Leer posición
-    sec = I2C_Master_Read(0x00);      //lee posicion de reloj
-    I2C_Master_Write(0);
-    min = I2C_Master_Read(0x01);      //lee posicion de reloj
-    I2C_Master_Write(0);
-    hora = I2C_Master_Read(0x02);      //lee posicion de reloj
-    I2C_Master_Write(1);
-    I2C_Master_Stop();             //Termina comunicaion I2C
-}

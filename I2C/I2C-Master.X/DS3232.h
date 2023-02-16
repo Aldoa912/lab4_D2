@@ -15,12 +15,16 @@ int dia;
 int mes;
 int anio;
 
+
 void enviar_hora(void);
-uint8_t leer_seg(void);
-uint8_t leer_min(void);
-uint8_t leer_hora(void);
+int leer_seg(void);
+int leer_min(void);
+int leer_hora(void);
+int leer_dia (void);
+int leer_mes (void);
+int leer_anio (void);
 void enviar_fecha(void);
-void leer_fecha(void);
+
 
 
 

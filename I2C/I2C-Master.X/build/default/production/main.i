@@ -2728,19 +2728,96 @@ void Lcd_Shift_Right(void);
 
 void Lcd_Shift_Left(void);
 # 37 "main.c" 2
-# 49 "main.c"
-uint8_t ADC;
-char centenas;
-char decenas;
-char unidad;
+
+# 1 "./DS3232.h" 1
+# 11 "./DS3232.h"
 int sec;
 int min;
 int hora;
 int dia;
 int mes;
 int anio;
+
+
+void enviar_hora(void);
+int leer_seg(void);
+int leer_min(void);
+int leer_hora(void);
+int leer_dia (void);
+int leer_mes (void);
+int leer_anio (void);
+void enviar_fecha(void);
+# 38 "main.c" 2
+# 50 "main.c"
+uint8_t ADC;
+char centenas;
+char decenas;
+char unidad;
+char u_sec;
+char d_sec;
+char u_min;
+char d_min;
+char u_hora;
+char d_hora;
+char u_dia;
+char d_dia;
+char u_mes;
+char d_mes;
+char u_anio;
+char d_anio;
+char Fecha[];
+int sec;
+int min;
+int hora;
+int dia;
+int mes;
+int anio;
+int flag;
+int contador;
 void setup(void);
-void leer_hora(void);
+
+
+
+void __attribute__((picinterrupt(("")))) isr (void){
+    if (INTCONbits.RBIF){
+        if (PORTBbits.RB0 == 0){
+            flag++;
+            PORTAbits.RA0 = 1;
+            if (flag == 2){
+                flag = 0;
+                PORTAbits.RA0 = 0;
+            }
+
+        }
+
+        else if (PORTBbits.RB1 == 0 && flag == 1){
+            contador++;
+            if (contador == 3)
+                contador = 0;
+        }
+
+        else if (PORTBbits.RB2 == 0 && flag == 1){
+            if (contador == 0)
+                dia++;
+            else if (contador == 1)
+                mes++;
+            else if (contador == 2)
+                anio++;
+        }
+
+        else if (PORTBbits.RB3 == 0 && flag == 1){
+            if (contador == 0)
+                dia--;
+            else if (contador == 1)
+                mes--;
+            else if (contador == 2)
+                anio--;
+        }
+
+        INTCONbits.RBIF = 0;
+    }
+    return;
+}
 
 
 
@@ -2750,22 +2827,22 @@ void main(void) {
     Lcd_Init();
     Lcd_Clear();
     Lcd_Set_Cursor(1,1);
-    Lcd_Write_String("ADC     Fecha");
+    Lcd_Write_String("ADC");
     while(1){
-# 87 "main.c"
-        I2C_Master_Start();
-        I2C_Master_Write(0x50);
-        I2C_Master_Write(PORTB);
-        I2C_Master_Stop();
-        _delay((unsigned long)((250)*(8000000/4000000.0)));
+
+
+        sec = leer_seg();
+        min = leer_min();
+        hora = leer_hora();
+        dia = leer_dia();
+        mes = leer_mes();
+        anio = leer_anio();
 
         I2C_Master_Start();
         I2C_Master_Write(0x51);
         ADC = I2C_Master_Read(0);
         I2C_Master_Stop();
         _delay((unsigned long)((250)*(8000000/4000000.0)));
-
-        leer_hora();
 
         centenas = (ADC/100);
         decenas = (ADC/10)%10;
@@ -2776,9 +2853,96 @@ void main(void) {
         Lcd_Write_Char(decenas + 48);
         Lcd_Write_Char(unidad + 48);
 
-        Lcd_Set_Cursor(2,8);
-        Lcd_Write_Char(sec+48);
 
+        u_hora = hora%10;
+        d_hora = (hora/10)%10;
+
+        Lcd_Set_Cursor(1,7);
+        Lcd_Write_Char(d_hora+48);
+        Lcd_Write_Char(u_hora+48);
+        Lcd_Write_Char(':');
+
+
+        u_min = min%10;
+        d_min = (min/10)%10;
+
+        Lcd_Write_Char(d_min+48);
+        Lcd_Write_Char(u_min+48);
+        Lcd_Write_Char(':');
+
+
+        u_sec = sec%10;
+        d_sec = (sec/10)%10;
+
+        Lcd_Write_Char(d_sec+48);
+        Lcd_Write_Char(u_sec+48);
+
+
+        u_dia = dia%10;
+        d_dia = (dia/10)%10;
+
+        Lcd_Set_Cursor(2,7);
+        Lcd_Write_Char(d_dia+48);
+        Lcd_Write_Char(u_dia+48);
+        Lcd_Write_Char('/');
+
+        u_mes = mes%10;
+        d_mes = (mes/10)%10;
+
+        Lcd_Write_Char(d_mes+48);
+        Lcd_Write_Char(u_mes+48);
+        Lcd_Write_Char('/');
+
+        u_anio = anio%10;
+        d_anio = (anio/10)%10;
+
+        Lcd_Write_String("20");
+        Lcd_Write_Char(d_anio+48);
+        Lcd_Write_Char(u_anio+48);
+
+        while (flag == 1){
+
+            enviar_fecha();
+
+            I2C_Master_Start();
+            I2C_Master_Write(0x51);
+            ADC = I2C_Master_Read(0);
+            I2C_Master_Stop();
+            _delay((unsigned long)((250)*(8000000/4000000.0)));
+
+            centenas = (ADC/100);
+            decenas = (ADC/10)%10;
+            unidad = ADC%10;
+
+            Lcd_Set_Cursor(2,1);
+            Lcd_Write_Char(centenas + 48);
+            Lcd_Write_Char(decenas + 48);
+            Lcd_Write_Char(unidad + 48);
+
+            u_dia = dia%10;
+            d_dia = (dia/10)%10;
+
+            Lcd_Set_Cursor(2,7);
+            Lcd_Write_Char(d_dia+48);
+            Lcd_Write_Char(u_dia+48);
+            Lcd_Write_Char('/');
+
+            u_mes = mes%10;
+            d_mes = (mes/10)%10;
+
+            Lcd_Write_Char(d_mes+48);
+            Lcd_Write_Char(u_mes+48);
+            Lcd_Write_Char('/');
+
+            u_anio = anio%10;
+            d_anio = (anio/10)%10;
+
+            Lcd_Write_String("20");
+            Lcd_Write_Char(d_anio+48);
+            Lcd_Write_Char(u_anio+48);
+
+
+        }
 
     }
     return;
@@ -2789,27 +2953,26 @@ void main(void) {
 void setup(void){
     ANSEL = 0;
     ANSELH = 0;
-    TRISB = 0;
+    TRISB = 0b00001111;
     TRISD = 0;
+    TRISA = 0;
     PORTB = 0;
     PORTD = 0;
+    PORTA = 0;
+    OPTION_REGbits.nRBPU = 0;
+    WPUBbits.WPUB0 = 1;
+    WPUBbits.WPUB1 = 1;
+    WPUBbits.WPUB2 = 1;
+    WPUBbits.WPUB3 = 1;
+
+    IOCB = 0b00001111;
+
+
+    INTCONbits.RBIF = 0;
+    INTCONbits.RBIE = 1;
+    INTCONbits.GIE = 1;
+
     OSCCONbits.IRCF = 0b111;
     OSCCONbits.SCS = 1;
     I2C_Master_Init(100000);
-}
-
-void leer_hora(void){
-
-    I2C_Master_Start();
-    I2C_Master_Write(0xD0);
-    I2C_Master_Write(0x00);
-    I2C_Master_RepeatedStart();
-    I2C_Master_Write(0xD1);
-    sec = I2C_Master_Read(0x00);
-    I2C_Master_Write(0);
-    min = I2C_Master_Read(0x01);
-    I2C_Master_Write(0);
-    hora = I2C_Master_Read(0x02);
-    I2C_Master_Write(1);
-    I2C_Master_Stop();
 }

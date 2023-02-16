@@ -298,8 +298,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 138 ]
 }
 "16
-[; ;DS3232.c: 16: uint8_t leer_seg(void){
-[v _leer_seg `(uc ~T0 @X0 1 ef ]
+[; ;DS3232.c: 16: int leer_seg(void){
+[v _leer_seg `(i ~T0 @X0 1 ef ]
 {
 [e :U _leer_seg ]
 [f ]
@@ -325,91 +325,97 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;DS3232.c: 24:     I2C_Master_Stop();
 [e ( _I2C_Master_Stop ..  ]
 "25
-[; ;DS3232.c: 25: }
+[; ;DS3232.c: 25:     sec = (sec>>4)*10 + (sec & 0x0F);
+[e = _sec + * >> _sec -> 4 `i -> 10 `i & _sec -> 15 `i ]
+"26
+[; ;DS3232.c: 26:     return sec;
+[e ) _sec ]
+[e $UE 139  ]
+"27
+[; ;DS3232.c: 27: }
 [e :UE 139 ]
 }
-"27
-[; ;DS3232.c: 27: uint8_t leer_min(void){
-[v _leer_min `(uc ~T0 @X0 1 ef ]
+"29
+[; ;DS3232.c: 29: int leer_min(void){
+[v _leer_min `(i ~T0 @X0 1 ef ]
 {
 [e :U _leer_min ]
 [f ]
-"29
-[; ;DS3232.c: 29:     I2C_Master_Start();
-[e ( _I2C_Master_Start ..  ]
-"30
-[; ;DS3232.c: 30:     I2C_Master_Write(0xD0);
-[e ( _I2C_Master_Write (1 -> -> 208 `i `ui ]
 "31
-[; ;DS3232.c: 31:     I2C_Master_Write(0x00);
-[e ( _I2C_Master_Write (1 -> -> 0 `i `ui ]
+[; ;DS3232.c: 31:     I2C_Master_Start();
+[e ( _I2C_Master_Start ..  ]
 "32
-[; ;DS3232.c: 32:     I2C_Master_RepeatedStart();
-[e ( _I2C_Master_RepeatedStart ..  ]
+[; ;DS3232.c: 32:     I2C_Master_Write(0xD0);
+[e ( _I2C_Master_Write (1 -> -> 208 `i `ui ]
 "33
-[; ;DS3232.c: 33:     I2C_Master_Write(0xD1);
-[e ( _I2C_Master_Write (1 -> -> 209 `i `ui ]
+[; ;DS3232.c: 33:     I2C_Master_Write(0x01);
+[e ( _I2C_Master_Write (1 -> -> 1 `i `ui ]
 "34
-[; ;DS3232.c: 34:     min = I2C_Master_Read(0x01);
-[e = _min -> ( _I2C_Master_Read (1 -> -> 1 `i `us `i ]
+[; ;DS3232.c: 34:     I2C_Master_RepeatedStart();
+[e ( _I2C_Master_RepeatedStart ..  ]
+"35
+[; ;DS3232.c: 35:     I2C_Master_Write(0xD1);
+[e ( _I2C_Master_Write (1 -> -> 209 `i `ui ]
 "36
-[; ;DS3232.c: 36:     I2C_Master_Stop();
-[e ( _I2C_Master_Stop ..  ]
+[; ;DS3232.c: 36:     min = I2C_Master_Read(0x00);
+[e = _min -> ( _I2C_Master_Read (1 -> -> 0 `i `us `i ]
 "37
-[; ;DS3232.c: 37: }
+[; ;DS3232.c: 37:     I2C_Master_Stop();
+[e ( _I2C_Master_Stop ..  ]
+"38
+[; ;DS3232.c: 38:     min = (min>>4)*10 + (min & 0x0F);
+[e = _min + * >> _min -> 4 `i -> 10 `i & _min -> 15 `i ]
+"39
+[; ;DS3232.c: 39:     return min;
+[e ) _min ]
+[e $UE 140  ]
+"40
+[; ;DS3232.c: 40: }
 [e :UE 140 ]
 }
-"39
-[; ;DS3232.c: 39: uint8_t leer_hora(void){
-[v _leer_hora `(uc ~T0 @X0 1 ef ]
+"42
+[; ;DS3232.c: 42: int leer_hora(void){
+[v _leer_hora `(i ~T0 @X0 1 ef ]
 {
 [e :U _leer_hora ]
 [f ]
-"41
-[; ;DS3232.c: 41:     I2C_Master_Start();
-[e ( _I2C_Master_Start ..  ]
-"42
-[; ;DS3232.c: 42:     I2C_Master_Write(0xD0);
-[e ( _I2C_Master_Write (1 -> -> 208 `i `ui ]
-"43
-[; ;DS3232.c: 43:     I2C_Master_Write(0x00);
-[e ( _I2C_Master_Write (1 -> -> 0 `i `ui ]
 "44
-[; ;DS3232.c: 44:     I2C_Master_RepeatedStart();
-[e ( _I2C_Master_RepeatedStart ..  ]
+[; ;DS3232.c: 44:     I2C_Master_Start();
+[e ( _I2C_Master_Start ..  ]
 "45
-[; ;DS3232.c: 45:     I2C_Master_Write(0xD1);
-[e ( _I2C_Master_Write (1 -> -> 209 `i `ui ]
+[; ;DS3232.c: 45:     I2C_Master_Write(0xD0);
+[e ( _I2C_Master_Write (1 -> -> 208 `i `ui ]
 "46
-[; ;DS3232.c: 46:     sec = I2C_Master_Read(0x00);
-[e = _sec -> ( _I2C_Master_Read (1 -> -> 0 `i `us `i ]
+[; ;DS3232.c: 46:     I2C_Master_Write(0x02);
+[e ( _I2C_Master_Write (1 -> -> 2 `i `ui ]
 "47
-[; ;DS3232.c: 47:     I2C_Master_Write(0);
-[e ( _I2C_Master_Write (1 -> -> 0 `i `ui ]
+[; ;DS3232.c: 47:     I2C_Master_RepeatedStart();
+[e ( _I2C_Master_RepeatedStart ..  ]
 "48
-[; ;DS3232.c: 48:     min = I2C_Master_Read(0x01);
-[e = _min -> ( _I2C_Master_Read (1 -> -> 1 `i `us `i ]
+[; ;DS3232.c: 48:     I2C_Master_Write(0xD1);
+[e ( _I2C_Master_Write (1 -> -> 209 `i `ui ]
 "49
-[; ;DS3232.c: 49:     I2C_Master_Write(0);
-[e ( _I2C_Master_Write (1 -> -> 0 `i `ui ]
+[; ;DS3232.c: 49:     hora = I2C_Master_Read(0x00);
+[e = _hora -> ( _I2C_Master_Read (1 -> -> 0 `i `us `i ]
 "50
-[; ;DS3232.c: 50:     hora = I2C_Master_Read(0x02);
-[e = _hora -> ( _I2C_Master_Read (1 -> -> 2 `i `us `i ]
-"51
-[; ;DS3232.c: 51:     I2C_Master_Write(1);
-[e ( _I2C_Master_Write (1 -> -> 1 `i `ui ]
-"52
-[; ;DS3232.c: 52:     I2C_Master_Stop();
+[; ;DS3232.c: 50:     I2C_Master_Stop();
 [e ( _I2C_Master_Stop ..  ]
+"51
+[; ;DS3232.c: 51:     hora = (hora>>4)*10 + (hora & 0x0F);
+[e = _hora + * >> _hora -> 4 `i -> 10 `i & _hora -> 15 `i ]
+"52
+[; ;DS3232.c: 52:     return hora;
+[e ) _hora ]
+[e $UE 141  ]
 "53
 [; ;DS3232.c: 53: }
 [e :UE 141 ]
 }
 "55
-[; ;DS3232.c: 55: void enviar_fecha(void){
-[v _enviar_fecha `(v ~T0 @X0 1 ef ]
+[; ;DS3232.c: 55: int leer_dia(void){
+[v _leer_dia `(i ~T0 @X0 1 ef ]
 {
-[e :U _enviar_fecha ]
+[e :U _leer_dia ]
 [f ]
 "57
 [; ;DS3232.c: 57:     I2C_Master_Start();
@@ -421,64 +427,132 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;DS3232.c: 59:     I2C_Master_Write(0x04);
 [e ( _I2C_Master_Write (1 -> -> 4 `i `ui ]
 "60
-[; ;DS3232.c: 60:     I2C_Master_Write(dia);
-[e ( _I2C_Master_Write (1 -> _dia `ui ]
+[; ;DS3232.c: 60:     I2C_Master_RepeatedStart();
+[e ( _I2C_Master_RepeatedStart ..  ]
 "61
-[; ;DS3232.c: 61:     I2C_Master_Write(mes);
-[e ( _I2C_Master_Write (1 -> _mes `ui ]
+[; ;DS3232.c: 61:     I2C_Master_Write(0xD1);
+[e ( _I2C_Master_Write (1 -> -> 209 `i `ui ]
 "62
-[; ;DS3232.c: 62:     I2C_Master_Write(anio);
-[e ( _I2C_Master_Write (1 -> _anio `ui ]
+[; ;DS3232.c: 62:     dia = I2C_Master_Read(0x00);
+[e = _dia -> ( _I2C_Master_Read (1 -> -> 0 `i `us `i ]
 "63
 [; ;DS3232.c: 63:     I2C_Master_Stop();
 [e ( _I2C_Master_Stop ..  ]
 "64
-[; ;DS3232.c: 64: }
+[; ;DS3232.c: 64:     dia = (dia>>4)*10 + (dia & 0x0F);
+[e = _dia + * >> _dia -> 4 `i -> 10 `i & _dia -> 15 `i ]
+"65
+[; ;DS3232.c: 65:     return dia;
+[e ) _dia ]
+[e $UE 142  ]
+"66
+[; ;DS3232.c: 66: }
 [e :UE 142 ]
 }
-"66
-[; ;DS3232.c: 66: void leer_fecha(void){
-[v _leer_fecha `(v ~T0 @X0 1 ef ]
-{
-[e :U _leer_fecha ]
-[f ]
 "68
-[; ;DS3232.c: 68:     I2C_Master_Start();
-[e ( _I2C_Master_Start ..  ]
-"69
-[; ;DS3232.c: 69:     I2C_Master_Write(0xD0);
-[e ( _I2C_Master_Write (1 -> -> 208 `i `ui ]
+[; ;DS3232.c: 68: int leer_mes(void){
+[v _leer_mes `(i ~T0 @X0 1 ef ]
+{
+[e :U _leer_mes ]
+[f ]
 "70
-[; ;DS3232.c: 70:     I2C_Master_Write(0x04);
-[e ( _I2C_Master_Write (1 -> -> 4 `i `ui ]
+[; ;DS3232.c: 70:     I2C_Master_Start();
+[e ( _I2C_Master_Start ..  ]
 "71
-[; ;DS3232.c: 71:     I2C_Master_RepeatedStart();
-[e ( _I2C_Master_RepeatedStart ..  ]
+[; ;DS3232.c: 71:     I2C_Master_Write(0xD0);
+[e ( _I2C_Master_Write (1 -> -> 208 `i `ui ]
 "72
-[; ;DS3232.c: 72:     I2C_Master_Write(0xD1);
-[e ( _I2C_Master_Write (1 -> -> 209 `i `ui ]
+[; ;DS3232.c: 72:     I2C_Master_Write(0x05);
+[e ( _I2C_Master_Write (1 -> -> 5 `i `ui ]
 "73
-[; ;DS3232.c: 73:     dia = I2C_Master_Read(0x04);
-[e = _dia -> ( _I2C_Master_Read (1 -> -> 4 `i `us `i ]
+[; ;DS3232.c: 73:     I2C_Master_RepeatedStart();
+[e ( _I2C_Master_RepeatedStart ..  ]
 "74
-[; ;DS3232.c: 74:     I2C_Master_Write(0);
-[e ( _I2C_Master_Write (1 -> -> 0 `i `ui ]
+[; ;DS3232.c: 74:     I2C_Master_Write(0xD1);
+[e ( _I2C_Master_Write (1 -> -> 209 `i `ui ]
 "75
-[; ;DS3232.c: 75:     mes = I2C_Master_Read(0x05);
-[e = _mes -> ( _I2C_Master_Read (1 -> -> 5 `i `us `i ]
+[; ;DS3232.c: 75:     mes = I2C_Master_Read(0x00);
+[e = _mes -> ( _I2C_Master_Read (1 -> -> 0 `i `us `i ]
 "76
-[; ;DS3232.c: 76:     I2C_Master_Write(0);
-[e ( _I2C_Master_Write (1 -> -> 0 `i `ui ]
-"77
-[; ;DS3232.c: 77:     anio = I2C_Master_Read(0x06);
-[e = _anio -> ( _I2C_Master_Read (1 -> -> 6 `i `us `i ]
-"78
-[; ;DS3232.c: 78:     I2C_Master_Write(1);
-[e ( _I2C_Master_Write (1 -> -> 1 `i `ui ]
-"79
-[; ;DS3232.c: 79:     I2C_Master_Stop();
+[; ;DS3232.c: 76:     I2C_Master_Stop();
 [e ( _I2C_Master_Stop ..  ]
-"80
-[; ;DS3232.c: 80: }
+"77
+[; ;DS3232.c: 77:     mes = (mes>>4)*10 + (mes & 0x0F);
+[e = _mes + * >> _mes -> 4 `i -> 10 `i & _mes -> 15 `i ]
+"78
+[; ;DS3232.c: 78:     return mes;
+[e ) _mes ]
+[e $UE 143  ]
+"79
+[; ;DS3232.c: 79: }
 [e :UE 143 ]
+}
+"81
+[; ;DS3232.c: 81: int leer_anio(void){
+[v _leer_anio `(i ~T0 @X0 1 ef ]
+{
+[e :U _leer_anio ]
+[f ]
+"83
+[; ;DS3232.c: 83:     I2C_Master_Start();
+[e ( _I2C_Master_Start ..  ]
+"84
+[; ;DS3232.c: 84:     I2C_Master_Write(0xD0);
+[e ( _I2C_Master_Write (1 -> -> 208 `i `ui ]
+"85
+[; ;DS3232.c: 85:     I2C_Master_Write(0x06);
+[e ( _I2C_Master_Write (1 -> -> 6 `i `ui ]
+"86
+[; ;DS3232.c: 86:     I2C_Master_RepeatedStart();
+[e ( _I2C_Master_RepeatedStart ..  ]
+"87
+[; ;DS3232.c: 87:     I2C_Master_Write(0xD1);
+[e ( _I2C_Master_Write (1 -> -> 209 `i `ui ]
+"88
+[; ;DS3232.c: 88:     anio = I2C_Master_Read(0x00);
+[e = _anio -> ( _I2C_Master_Read (1 -> -> 0 `i `us `i ]
+"89
+[; ;DS3232.c: 89:     I2C_Master_Stop();
+[e ( _I2C_Master_Stop ..  ]
+"90
+[; ;DS3232.c: 90:     anio = (anio>>4)*10 + (anio & 0x0F);
+[e = _anio + * >> _anio -> 4 `i -> 10 `i & _anio -> 15 `i ]
+"91
+[; ;DS3232.c: 91:     return hora;
+[e ) _hora ]
+[e $UE 144  ]
+"92
+[; ;DS3232.c: 92: }
+[e :UE 144 ]
+}
+"94
+[; ;DS3232.c: 94: void enviar_fecha(void){
+[v _enviar_fecha `(v ~T0 @X0 1 ef ]
+{
+[e :U _enviar_fecha ]
+[f ]
+"96
+[; ;DS3232.c: 96:     I2C_Master_Start();
+[e ( _I2C_Master_Start ..  ]
+"97
+[; ;DS3232.c: 97:     I2C_Master_Write(0xD0);
+[e ( _I2C_Master_Write (1 -> -> 208 `i `ui ]
+"98
+[; ;DS3232.c: 98:     I2C_Master_Write(0x04);
+[e ( _I2C_Master_Write (1 -> -> 4 `i `ui ]
+"99
+[; ;DS3232.c: 99:     I2C_Master_Write(dia);
+[e ( _I2C_Master_Write (1 -> _dia `ui ]
+"100
+[; ;DS3232.c: 100:     I2C_Master_Write(mes);
+[e ( _I2C_Master_Write (1 -> _mes `ui ]
+"101
+[; ;DS3232.c: 101:     I2C_Master_Write(anio);
+[e ( _I2C_Master_Write (1 -> _anio `ui ]
+"102
+[; ;DS3232.c: 102:     I2C_Master_Stop();
+[e ( _I2C_Master_Stop ..  ]
+"103
+[; ;DS3232.c: 103: }
+[e :UE 145 ]
 }
